@@ -13,9 +13,9 @@ jobs:
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Docker image
-        run: docker build -t ali769/reactappnode:latest .
+        run: docker build -t jondy483/reactapptest:latest .
       - name: Publish image to Docker Hub
-        run: docker push ali769/reactappnode:latest
+        run: docker push jondy483/reactapptest:latest
 
   deploy:
     needs: build
@@ -24,9 +24,9 @@ jobs:
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Pull image from Docker Hub
-        run: docker pull ali769/reactappnode:latest
+        run: docker pull jondy483/reactapptest:latest
       - name: Delete old container (if exists)
         run: docker rm -f nodejs-app-container || true
       - name: Run Docker container
-        run: docker run -d -p 8080:3000 --name nodejs-app-container ali769/reactappnode:latest
+        run: docker run -d -p 8080:3000 --name nodejs-app-container jondy483/reactapptest:latest
         
